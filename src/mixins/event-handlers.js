@@ -89,7 +89,6 @@ var EventHandlers = {
     if (this.state.animating) {
       return;
     }
-
     if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
       e.preventDefault();
     }
