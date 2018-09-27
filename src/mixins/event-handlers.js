@@ -89,9 +89,22 @@ var EventHandlers = {
     if (this.state.animating) {
       return;
     }
+
     if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
       e.preventDefault();
     }
+
+    // @@ CUSTOM PATCH START @@
+    // DONT LET SLIDER SLIDE IF USER SCROLLS VERTICALLY DOWN
+    const minimalValue = 5; // treshhold
+    const customClientX = e.touches[0].clientX - this.state.startX;
+    if (Math.abs(customClientX) < minimalValue) {
+      e.preventDefault();
+      e.returnValue = false;
+      return false;
+    }
+    // @@ CUSTOM PATCH END @@
+
     var swipeLeft;
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
